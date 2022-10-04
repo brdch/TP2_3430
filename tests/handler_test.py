@@ -115,6 +115,17 @@ def _check_batch_details(ips, details, token):
             assert "abuse" in d
             assert "domains" in d
 
+def test_handler_utils_coords():
+    coords = handler_utils.read_coords(",2")
+    assert coords == (None, None)
+
+def test_handler_utils_coords_length():
+    coords = handler_utils.read_coords("1,2,3")
+    assert coords == (None, None)
+
+def test_handler_utils_get_headers_not_null():
+    headers = handler_utils.get_headers("True")
+    assert headers["authorization"] != None
 
 @pytest.mark.parametrize("batch_size", [None, 1, 2, 3])
 def test_get_batch_details(batch_size):
