@@ -125,7 +125,10 @@ def test_handler_utils_coords_length():
 
 def test_handler_utils_get_headers_not_null():
     headers = handler_utils.get_headers("True")
-    assert headers["authorization"] != None
+    assert headers["authorization"] == "Bearer True"
+
+def test_handler_utils_cache_ttl():
+    assert handler_utils.CACHE_TTL == 86400
 
 @pytest.mark.parametrize("batch_size", [None, 1, 2, 3])
 def test_get_batch_details(batch_size):
